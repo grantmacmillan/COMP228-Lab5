@@ -8,17 +8,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="openjdk-16" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/ojdbc8 (1).jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:12.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-controls:win:12.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:12.0.2" level="project" />
@@ -39,7 +30,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../ojdbc11.jar!/" />
+          <root url="jar://$MODULE_DIR$/ojdbc11.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
