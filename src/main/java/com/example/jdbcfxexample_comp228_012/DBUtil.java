@@ -65,6 +65,20 @@ public class DBUtil {
         dbDisconnect();
 
     }
+    public static void insertPlayerData(Integer p_id, String p_fName, String p_lName, String p_address, String p_postalCode, String p_province, Long p_phoneNum)throws SQLException{
+
+        dbConnect();
+
+        String sql = "INSERT INTO " + "Player" + " VALUES(" + p_id + ",'" + p_fName + "','" + p_lName+ "','" + p_address+ "','" + p_postalCode+ "','" + p_province+ "'," + p_phoneNum+ ")";
+        statement.executeUpdate(sql);
+        System.out.println("Data is inserted!");
+
+        if (statement !=null) {
+            statement.close();
+        }
+        dbDisconnect();
+
+    }
 
     public static ResultSet query(String tableName, String sql)throws SQLException{
         CachedRowSet crs = RowSetProvider.newFactory().createCachedRowSet();
@@ -93,6 +107,9 @@ public class DBUtil {
         }
         dbDisconnect();
 
+    }
+    public static void updatePlayerData() {
+        
     }
 
     public static void main(String[] arg) throws SQLException{

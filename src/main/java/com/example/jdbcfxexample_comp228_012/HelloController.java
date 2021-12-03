@@ -36,7 +36,7 @@ public class HelloController {
 
     //Player
     @FXML
-    private TextField PlayerIdField;
+    private TextField playerIdField;
     @FXML
     private TextField playerFnameField;
     @FXML
@@ -88,6 +88,23 @@ public class HelloController {
         Game game = (Game) table.getSelectionModel().getSelectedItem();
         DBUtil.delete("Game", game.getG_id(), "game_id");
         populateData();
+    }
+
+    public void onPlayerAdd(ActionEvent actionEvent) throws SQLException{
+        DBUtil.insertPlayerData(parseInt(playerIdField.getText()),playerFnameField.getText(), playerLnameField.getText(),playerAddressField.getText(),playerPCField.getText(),playerProvinceField.getText(),Long.parseLong(playerNumField.getText()));
+        populateData();
+    }
+
+    public void onPlayerDelete(ActionEvent actionEvent) throws SQLException {
+        Player player = (Player) playerTable.getSelectionModel().getSelectedItem();
+        DBUtil.delete("Player", player.getP_id(), "player_id");
+        populateData();
+    }
+
+    public void onPlayerUpdate(ActionEvent actionEvent) {
+    }
+
+    public void onPlayerEdit(ActionEvent actionEvent) {
     }
 
     public void populateData() throws SQLException{
@@ -147,4 +164,6 @@ public class HelloController {
     public void onCreate(ActionEvent actionEvent)throws SQLException  {
         DBUtil.createTable("COMP228_012");
     }
+
+
 }
