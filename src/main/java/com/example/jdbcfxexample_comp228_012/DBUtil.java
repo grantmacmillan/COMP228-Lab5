@@ -108,8 +108,24 @@ public class DBUtil {
         dbDisconnect();
 
     }
-    public static void updatePlayerData() {
-        
+    public static void updatePlayerData(Integer p_id, String p_fName, String p_lName, String p_address, String p_postalCode, String p_province, Long p_phoneNum) throws SQLException {
+        dbConnect();
+        String sql = "UPDATE Player\n" +
+                     "SET player_id = " + p_id + ",\n" +
+                "first_name = '" + p_fName + "',\n" +
+                "last_name = '" + p_lName + "',\n" +
+                "address = '" + p_address + "',\n" +
+                "postal_code = '" + p_postalCode + "',\n" +
+                "province = '" + p_province + "',\n" +
+                "phone_number = " + p_phoneNum + "\n" +
+                "WHERE player_id = " + p_id;
+        statement.executeUpdate(sql);
+        System.out.println("Data is Updated");
+        if (statement !=null) {
+            statement.close();
+        }
+        dbDisconnect();
+
     }
 
     public static void main(String[] arg) throws SQLException{

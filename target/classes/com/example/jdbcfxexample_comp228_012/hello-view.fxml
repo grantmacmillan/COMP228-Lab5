@@ -36,7 +36,7 @@
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                     <TableView fx:id="playerTable" layoutX="55.0" layoutY="330.0" prefHeight="173.0" prefWidth="650.0">
+                     <TableView fx:id="playerTable" layoutX="55.0" layoutY="330.0" onMouseClicked="#onPlayerSelected" prefHeight="173.0" prefWidth="650.0">
                        <columns>
                          <TableColumn fx:id="playerIdColumn" prefWidth="75.0" text="ID" />
                          <TableColumn fx:id="playerFnameColumn" prefWidth="75.0" text="FNAME" />
@@ -57,7 +57,6 @@
                      <Button layoutX="361.0" layoutY="58.0" mnemonicParsing="false" onAction="#onPlayerAdd" text="Add" />
                      <Button layoutX="354.0" layoutY="95.0" mnemonicParsing="false" onAction="#onPlayerDelete" text="Delete" />
                      <Button layoutX="386.0" layoutY="174.0" mnemonicParsing="false" onAction="#onPlayerUpdate" text="Update" />
-                     <Button layoutX="343.0" layoutY="174.0" mnemonicParsing="false" onAction="#onPlayerEdit" text="Edit" />
                   </children></AnchorPane>
          </content>
        </Tab>

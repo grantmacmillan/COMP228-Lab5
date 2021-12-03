@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -99,13 +100,14 @@ public class HelloController {
         Player player = (Player) playerTable.getSelectionModel().getSelectedItem();
         DBUtil.delete("Player", player.getP_id(), "player_id");
         populateData();
+        clearTextFields();
     }
 
-    public void onPlayerUpdate(ActionEvent actionEvent) {
+    public void onPlayerUpdate(ActionEvent actionEvent) throws SQLException{
+        DBUtil.updatePlayerData(parseInt(playerIdField.getText()),playerFnameField.getText(), playerLnameField.getText(),playerAddressField.getText(),playerPCField.getText(),playerProvinceField.getText(),Long.parseLong(playerNumField.getText()));
+        populateData();
     }
-
-    public void onPlayerEdit(ActionEvent actionEvent) {
-    }
+    
 
     public void populateData() throws SQLException{
         ResultSet rs = DBUtil.query("Game", "SELECT * FROM");
@@ -166,4 +168,25 @@ public class HelloController {
     }
 
 
+    public void onPlayerSelected(MouseEvent mouseEvent) throws SQLException{
+        Player player = (Player) playerTable.getSelectionModel().getSelectedItem();
+
+        playerIdField.setText(player.getP_id().toString());
+        playerFnameField.setText(player.getP_fName());
+        playerLnameField.setText(player.getP_lName());
+        playerAddressField.setText(player.getP_address());
+        playerPCField.setText(player.getP_postalCode());
+        playerProvinceField.setText(player.getP_province());
+        playerNumField.setText(player.getP_phoneNum().toString());
+    }
+
+    public void clearTextFields(){
+        playerIdField.clear();
+        playerFnameField.clear();
+        playerLnameField.clear();
+        playerAddressField.clear();
+        playerPCField.clear();
+        playerProvinceField.clear();
+        playerNumField.clear();
+    }
 }
