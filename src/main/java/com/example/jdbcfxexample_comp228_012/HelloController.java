@@ -9,7 +9,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Struct;
 
 import static java.lang.Integer.parseInt;
 
@@ -39,43 +38,35 @@ public class HelloController {
     }
 
     public void onAdd(ActionEvent actionEvent) throws SQLException {
-        DBUtil.insertData("COMP228_012", parseInt(studentIdField.getText()),studentNameField.getText());
+        DBUtil.insertData("Game", parseInt(studentIdField.getText()),studentNameField.getText());
         populateData();
     }
 
-    public void onDelete(ActionEvent actionEvent) throws SQLException {
-        Student student = (Student) table.getSelectionModel().getSelectedItem();
-        DBUtil.delete("COMP228_012", student.getS_id());
+    public void onGameDelete(ActionEvent actionEvent) throws SQLException {
+        Game game = (Game) table.getSelectionModel().getSelectedItem();
+        DBUtil.delete("Game", game.getG_id(), "game_id");
         populateData();
-    }
-
-    public void onDrop(ActionEvent actionEvent) throws SQLException {
-        DBUtil.dropTable("COMP228_012");
-    }
-
-    public void onCreate(ActionEvent actionEvent)throws SQLException  {
-        DBUtil.createTable("COMP228_012");
     }
 
     public void populateData() throws SQLException{
-        ResultSet rs = DBUtil.query("COMP228_012", "SELECT * FROM");
+        ResultSet rs = DBUtil.query("Game", "SELECT * FROM");
         //create list of objects that we want to show in the table
-        ObservableList<Student> students = FXCollections.observableArrayList();
+        ObservableList<Game> games = FXCollections.observableArrayList();
 
         //add objects one by one to the list
         while (rs.next()){
-            Student student = new Student(rs.getInt("s_id"), rs.getString("s_name"));
-            students.add(student);
+            Game game = new Game(rs.getInt("game_id"), rs.getString("game_title"));
+            games.add(game);
         }
 
         //assign each attribute of the Student class (entity) to each column of the table
-        studentIdColumn.setCellValueFactory(new PropertyValueFactory("s_id"));
-        studentNameColumn.setCellValueFactory(new PropertyValueFactory("s_name"));
+        studentIdColumn.setCellValueFactory(new PropertyValueFactory("g_id"));
+        studentNameColumn.setCellValueFactory(new PropertyValueFactory("g_title"));
 
         //clear the table
         table.getItems().clear();
         //add data to the table
-        table.getItems().addAll(students);
+        table.getItems().addAll(games);
 
         //sort the table by id
 
@@ -83,5 +74,12 @@ public class HelloController {
         table.getSortOrder().add(studentIdColumn);
         table.sort();
 
+    }
+    public void onDrop(ActionEvent actionEvent) throws SQLException {
+        DBUtil.dropTable("COMP228_012");
+    }
+
+    public void onCreate(ActionEvent actionEvent)throws SQLException  {
+        DBUtil.createTable("COMP228_012");
     }
 }

@@ -82,9 +82,9 @@ public class DBUtil {
         return crs;
     }
 
-    public static void delete(String tableName, Integer s_id)throws SQLException{
+    public static void delete(String tableName, Integer g_id, String idName)throws SQLException{
         dbConnect();
-        String sql = "DELETE FROM " + tableName + " WHERE s_id =" + s_id;
+        String sql = "DELETE FROM " + tableName + " WHERE " + idName + " =" + g_id;
         statement.executeUpdate(sql);
         System.out.println("Data is deleted!");
 

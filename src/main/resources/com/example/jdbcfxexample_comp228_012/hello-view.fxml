@@ -10,7 +10,7 @@
     </padding>
    <TabPane prefHeight="595.0" prefWidth="760.0" tabClosingPolicy="UNAVAILABLE">
      <tabs>
-       <Tab text="Untitled Tab 1">
+       <Tab text="Game List">
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="760.0">
                   <children>
@@ -19,20 +19,20 @@
                      <TextField fx:id="studentIdField" layoutX="289.0" layoutY="80.0" />
                      <TextField fx:id="studentNameField" layoutX="289.0" layoutY="117.0" />
                      <Button fx:id="addButton" layoutX="345.0" layoutY="151.0" mnemonicParsing="false" onAction="#onAdd" text="Add" />
-                     <TableView fx:id="table" layoutX="263.0" layoutY="186.0" prefHeight="200.0" prefWidth="200.0">
+                     <TableView fx:id="table" layoutX="183.0" layoutY="196.0" prefHeight="196.0" prefWidth="362.0">
                        <columns>
-                         <TableColumn fx:id="studentIdColumn" prefWidth="75.0" text="C1" />
-                         <TableColumn fx:id="studentNameColumn" prefWidth="75.0" text="C2" />
+                         <TableColumn fx:id="studentIdColumn" prefWidth="100.0" text="ID" />
+                         <TableColumn fx:id="studentNameColumn" prefWidth="260.0" text="TITLE" />
                        </columns>
                      </TableView>
-                     <Button fx:id="deleteButton" layoutX="338.0" layoutY="412.0" mnemonicParsing="false" onAction="#onDelete" text="Delete" />
+                     <Button fx:id="deleteButton" layoutX="338.0" layoutY="412.0" mnemonicParsing="false" onAction="#onGameDelete" text="Delete" />
                   
                       <Label fx:id="welcomeText" />
                   </children>
                </AnchorPane>
          </content>
        </Tab>
-       <Tab text="Untitled Tab 2">
+       <Tab text="Player">
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
          </content>
