@@ -36,6 +36,28 @@ public class HelloController {
 
     //Player
     @FXML
+    private TextField PlayerIdField;
+    @FXML
+    private TextField playerFnameField;
+    @FXML
+    private TextField playerLnameField;
+    @FXML
+    private TextField playerAddressField;
+    @FXML
+    private TextField playerPCField;
+    @FXML
+    private TextField playerProvinceField;
+    @FXML
+    private TextField playerNumField;
+    @FXML
+    private Button playerAddButton;
+    @FXML
+    private Button playerDeleteButton;
+    @FXML
+    private Button playerEditButton;
+    @FXML
+    private Button playerUpdateButton;
+    @FXML
     private TableView playerTable;
     @FXML
     private TableColumn playerIdColumn;
