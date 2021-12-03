@@ -60,6 +60,27 @@
                   </children></AnchorPane>
          </content>
        </Tab>
+         <Tab text="Rate Game">
+             <content>
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <TextField layoutX="51.0" layoutY="43.0" promptText="Score" />
+                     <DatePicker layoutX="52.0" layoutY="78.0" prefHeight="25.0" prefWidth="147.0" promptText="Date Played" />
+                     <ComboBox layoutX="380.0" layoutY="43.0" prefWidth="150.0" promptText="Player" />
+                     <ComboBox layoutX="380.0" layoutY="91.0" prefWidth="150.0" promptText="Game" />
+                     <Button layoutX="174.0" layoutY="253.0" mnemonicParsing="false" text="Add" />
+                     <Button layoutX="225.0" layoutY="253.0" mnemonicParsing="false" text="Delete" />
+                     <TableView layoutX="20.0" layoutY="301.0" prefHeight="200.0" prefWidth="687.0">
+                       <columns>
+                         <TableColumn prefWidth="75.0" text="Name" />
+                         <TableColumn prefWidth="75.0" text="Game" />
+                           <TableColumn prefWidth="75.0" text="Score" />
+                           <TableColumn prefWidth="75.0" text="Date Played" />
+                       </columns>
+                     </TableView>
+                  </children></AnchorPane>
+             </content>
+         </Tab>
      </tabs>
    </TabPane>
 
