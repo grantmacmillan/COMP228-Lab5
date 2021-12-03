@@ -47,6 +47,13 @@
                            <TableColumn fx:id="playerNumColumn" prefWidth="75.0" text="PHONE#" />
                        </columns>
                      </TableView>
+                     <TextField layoutX="55.0" layoutY="45.0" promptText="Player ID" />
+                     <TextField layoutX="55.0" layoutY="82.0" promptText="First Name" />
+                     <TextField layoutX="55.0" layoutY="120.0" promptText="Last Name" />
+                     <TextField layoutX="55.0" layoutY="161.0" promptText="Address" />
+                     <TextField layoutX="55.0" layoutY="207.0" promptText="Postal Code" />
+                     <TextField layoutX="55.0" layoutY="241.0" promptText="Province" />
+                     <TextField layoutX="55.0" layoutY="284.0" promptText="Phone Number" />
                   </children></AnchorPane>
          </content>
        </Tab>

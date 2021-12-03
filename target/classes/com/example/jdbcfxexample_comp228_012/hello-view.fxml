@@ -47,6 +47,7 @@
                            <TableColumn fx:id="playerNumColumn" prefWidth="75.0" text="PHONE#" />
                        </columns>
                      </TableView>
+                     <TextField layoutX="55.0" layoutY="45.0" promptText="Player ID" />
                   </children></AnchorPane>
          </content>
        </Tab>
