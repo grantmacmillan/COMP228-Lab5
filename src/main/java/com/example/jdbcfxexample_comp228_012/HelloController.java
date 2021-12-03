@@ -74,6 +74,18 @@ public class HelloController {
     private TableColumn playerProvinceColumn;
     @FXML
     private TableColumn playerNumColumn;
+    
+    //Player + Game
+    @FXML
+    private DatePicker playerGameDate;
+    @FXML
+    private TextField playerGameScore;
+    @FXML
+    private ComboBox playerGameSelectPlayer;
+    @FXML
+    private ComboBox playerGameSelectGame;
+    @FXML
+    private TableView playerGameTable;
 
     public void initialize() throws SQLException{
         populateData();
