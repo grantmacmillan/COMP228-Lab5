@@ -34,7 +34,20 @@
        </Tab>
        <Tab text="Player">
          <content>
-           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <TableView fx:id="playerTable" layoutX="55.0" layoutY="330.0" prefHeight="173.0" prefWidth="650.0">
+                       <columns>
+                         <TableColumn fx:id="playerIdColumn" prefWidth="75.0" text="ID" />
+                         <TableColumn fx:id="playerFnameColumn" prefWidth="75.0" text="FNAME" />
+                           <TableColumn fx:id="playerLnameColumn" prefWidth="75.0" text="LNAME" />
+                           <TableColumn fx:id="playerAddressColumn" prefWidth="75.0" text="ADDRESS" />
+                           <TableColumn fx:id="playerPCColumn" prefWidth="75.0" text="POSTAL CODE" />
+                           <TableColumn fx:id="playerProvinceColumn" prefWidth="75.0" text="PROVINCE" />
+                           <TableColumn fx:id="playerNumColumn" prefWidth="75.0" text="PHONE#" />
+                       </columns>
+                     </TableView>
+                  </children></AnchorPane>
          </content>
        </Tab>
      </tabs>

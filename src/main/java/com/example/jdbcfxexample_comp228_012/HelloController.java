@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import static java.lang.Integer.parseInt;
 
 public class HelloController {
+
+    //Game
     @FXML
     private TextField studentIdField;
     @FXML
@@ -31,6 +33,24 @@ public class HelloController {
     private TableColumn studentIdColumn;
     @FXML
     private TableColumn studentNameColumn;
+
+    //Player
+    @FXML
+    private TableView playerTable;
+    @FXML
+    private TableColumn playerIdColumn;
+    @FXML
+    private TableColumn playerFnameColumn;
+    @FXML
+    private TableColumn playerLnameColumn;
+    @FXML
+    private TableColumn playerAddressColumn;
+    @FXML
+    private TableColumn playerPCColumn;
+    @FXML
+    private TableColumn playerProvinceColumn;
+    @FXML
+    private TableColumn playerNumColumn;
 
     public void initialize() throws SQLException{
         populateData();
@@ -74,6 +94,29 @@ public class HelloController {
         table.getSortOrder().add(studentIdColumn);
         table.sort();
 
+
+        //Player
+        rs = DBUtil.query("Player", "SELECT * FROM");
+        ObservableList<Player> players = FXCollections.observableArrayList();
+
+        while (rs.next()){
+            Player player = new Player(rs.getInt("player_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("address"), rs.getString("postal_code"), rs.getString("province"), rs.getLong("phone_number"));
+            players.add(player);
+        }
+        playerIdColumn.setCellValueFactory(new PropertyValueFactory("p_id"));
+        playerFnameColumn.setCellValueFactory(new PropertyValueFactory("p_fName"));
+        playerLnameColumn.setCellValueFactory(new PropertyValueFactory("p_lName"));
+        playerAddressColumn.setCellValueFactory(new PropertyValueFactory("p_address"));
+        playerPCColumn.setCellValueFactory(new PropertyValueFactory("p_postalCode"));
+        playerProvinceColumn.setCellValueFactory(new PropertyValueFactory("p_province"));
+        playerNumColumn.setCellValueFactory(new PropertyValueFactory("p_phoneNum"));
+
+        playerTable.getItems().clear();
+        playerTable.getItems().addAll(players);
+
+        playerIdColumn.setSortType(TableColumn.SortType.ASCENDING);
+        playerTable.getSortOrder().add(playerIdColumn);
+        playerTable.sort();
     }
     public void onDrop(ActionEvent actionEvent) throws SQLException {
         DBUtil.dropTable("COMP228_012");
