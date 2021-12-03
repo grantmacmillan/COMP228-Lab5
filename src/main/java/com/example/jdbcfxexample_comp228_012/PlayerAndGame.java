@@ -1,13 +1,15 @@
 package com.example.jdbcfxexample_comp228_012;
 
+import java.util.Date;
+
 public class PlayerAndGame {
     Integer p_g_id;
     Integer g_id;
     Integer p_id;
-    String playing_date;
+    Date playing_date;
     Integer score;
 
-    public PlayerAndGame(Integer p_g_id, Integer g_id, Integer p_id, String playing_date, Integer score) {
+    public PlayerAndGame(Integer p_g_id, Integer g_id, Integer p_id, Date playing_date, Integer score) {
         this.p_g_id = p_g_id;
         this.g_id = g_id;
         this.p_id = p_id;
@@ -39,11 +41,11 @@ public class PlayerAndGame {
         this.p_id = p_id;
     }
 
-    public String getPlaying_date() {
+    public Date getPlaying_date() {
         return playing_date;
     }
 
-    public void setPlaying_date(String playing_date) {
+    public void setPlaying_date(Date playing_date) {
         this.playing_date = playing_date;
     }
 

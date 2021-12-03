@@ -16,13 +16,13 @@
                   <children>
                      <Button fx:id="dropButton" layoutX="326.0" layoutY="14.0" mnemonicParsing="false" onAction="#onDrop" text="Drop Table" />
                      <Button fx:id="createButton" layoutX="322.0" layoutY="46.0" mnemonicParsing="false" onAction="#onCreate" text="Create Table" />
-                     <TextField fx:id="studentIdField" layoutX="289.0" layoutY="80.0" />
-                     <TextField fx:id="studentNameField" layoutX="289.0" layoutY="117.0" />
+                     <TextField fx:id="gameIdField" layoutX="289.0" layoutY="80.0" />
+                     <TextField fx:id="gameNameField" layoutX="289.0" layoutY="117.0" />
                      <Button fx:id="addButton" layoutX="345.0" layoutY="151.0" mnemonicParsing="false" onAction="#onAdd" text="Add" />
-                     <TableView fx:id="table" layoutX="183.0" layoutY="196.0" prefHeight="196.0" prefWidth="362.0">
+                     <TableView fx:id="gameTable" layoutX="183.0" layoutY="196.0" prefHeight="196.0" prefWidth="362.0">
                        <columns>
-                         <TableColumn fx:id="studentIdColumn" prefWidth="100.0" text="ID" />
-                         <TableColumn fx:id="studentNameColumn" prefWidth="260.0" text="TITLE" />
+                         <TableColumn fx:id="gameIdColumn" prefWidth="100.0" text="ID" />
+                         <TableColumn fx:id="gameNameColumn" prefWidth="260.0" text="TITLE" />
                        </columns>
                      </TableView>
                      <Button fx:id="deleteButton" layoutX="338.0" layoutY="412.0" mnemonicParsing="false" onAction="#onGameDelete" text="Delete" />
@@ -64,18 +64,19 @@
              <content>
                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                     <TextField layoutX="51.0" layoutY="43.0" promptText="Score" />
-                     <DatePicker layoutX="52.0" layoutY="78.0" prefHeight="25.0" prefWidth="147.0" promptText="Date Played" />
-                     <ComboBox layoutX="380.0" layoutY="43.0" prefWidth="150.0" promptText="Player" />
-                     <ComboBox layoutX="380.0" layoutY="91.0" prefWidth="150.0" promptText="Game" />
-                     <Button layoutX="174.0" layoutY="253.0" mnemonicParsing="false" text="Add" />
-                     <Button layoutX="225.0" layoutY="253.0" mnemonicParsing="false" text="Delete" />
-                     <TableView layoutX="20.0" layoutY="301.0" prefHeight="200.0" prefWidth="687.0">
+                     <TextField fx:id="playerGameScore" layoutX="51.0" layoutY="43.0" promptText="Score" />
+                     <DatePicker fx:id="playerGameDate" layoutX="52.0" layoutY="78.0" prefHeight="25.0" prefWidth="147.0" promptText="Date Played" />
+                     <ComboBox fx:id="playerGameSelectPlayer" layoutX="380.0" layoutY="43.0" prefWidth="150.0" promptText="Player" />
+                     <ComboBox fx:id="playerGameSelectGame" layoutX="380.0" layoutY="91.0" prefWidth="150.0" promptText="Game" />
+                     <Button layoutX="174.0" layoutY="253.0" mnemonicParsing="false" onAction="#onPlayerGameAdd" text="Add" />
+                     <Button layoutX="225.0" layoutY="253.0" mnemonicParsing="false" onAction="#onPlayerGameDelete" text="Delete" />
+                     <TableView fx:id="playerGameTable" layoutX="20.0" layoutY="301.0" prefHeight="200.0" prefWidth="687.0">
                        <columns>
-                         <TableColumn prefWidth="75.0" text="Name" />
-                         <TableColumn prefWidth="75.0" text="Game" />
-                           <TableColumn prefWidth="75.0" text="Score" />
-                           <TableColumn prefWidth="75.0" text="Date Played" />
+                         <TableColumn fx:id="playerGamePGIDColumn" prefWidth="75.0" text="PG ID" />
+                         <TableColumn fx:id="playerGamePIDColumn" prefWidth="75.0" text="P ID" />
+                           <TableColumn fx:id="playerGameGIDColumn" prefWidth="75.0" text="G ID" />
+                           <TableColumn fx:id="playerGameScoreColumn" prefWidth="75.0" text="SCORE" />
+                           <TableColumn fx:id="playerGameDateColumn" prefWidth="111.0" text="DATE PLAYED" />
                        </columns>
                      </TableView>
                   </children></AnchorPane>

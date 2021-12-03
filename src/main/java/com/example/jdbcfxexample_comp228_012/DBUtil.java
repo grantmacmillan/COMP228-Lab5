@@ -79,6 +79,19 @@ public class DBUtil {
         dbDisconnect();
 
     }
+    public static void insertPlayerGameData(Integer p_g_id, Integer g_id, Integer p_id, Date playing_date, Integer score)throws SQLException{
+
+        dbConnect();
+        String sql = "INSERT INTO " + "PlayerAndGame" + " VALUES(" + p_g_id + "," + g_id + "," + p_id+ "," + "TO_DATE('" + playing_date+ "', 'yyyy-mm-dd')," + score+ ")";
+        statement.executeUpdate(sql);
+        System.out.println("Data is inserted!");
+
+        if (statement !=null) {
+            statement.close();
+        }
+        dbDisconnect();
+
+    }
 
     public static ResultSet query(String tableName, String sql)throws SQLException{
         CachedRowSet crs = RowSetProvider.newFactory().createCachedRowSet();
