@@ -83,6 +83,8 @@ public class HelloController {
     @FXML
     private TextField playerGameScore;
     @FXML
+    private TextField playerGameId;
+    @FXML
     private ComboBox playerGameSelectPlayer;
     @FXML
     private ComboBox playerGameSelectGame;
@@ -98,6 +100,18 @@ public class HelloController {
     private TableColumn playerGameScoreColumn;
     @FXML
     private TableColumn playerGameDateColumn;
+
+    //Ratings
+    @FXML
+    private ComboBox ratePlayerCombo;
+    @FXML
+    private TableView rateTable;
+    @FXML
+    private TableColumn rateName;
+    @FXML
+    private TableColumn rateScore;
+    @FXML
+    private TableColumn rateDate;
 
     public void initialize() throws SQLException{
         populateData();
@@ -146,7 +160,7 @@ public class HelloController {
                 p_id = player.getP_id();
             }
         }
-        DBUtil.insertPlayerGameData(6, g_id,p_id, Date.valueOf(playerGameDate.getValue()), parseInt(playerGameScore.getText()));
+        DBUtil.insertPlayerGameData(parseInt(playerGameId.getText()), g_id,p_id, Date.valueOf(playerGameDate.getValue()), parseInt(playerGameScore.getText()));
         populateData();
     }
 
@@ -248,6 +262,11 @@ public class HelloController {
         playerGameSelectPlayer.getItems().addAll(playerNames);
 
        // playerGameSelectGame.getItems().add()
+        ratePlayerCombo.getItems().clear();
+        ratePlayerCombo.getItems().addAll(playerNames);
+
+
+
     }
 
 
@@ -276,6 +295,47 @@ public class HelloController {
         playerProvinceField.setText(player.getP_province());
         playerNumField.setText(player.getP_phoneNum().toString());
     }
+    public void onRatePlayerChosen(ActionEvent actionEvent) {
+        //Use name of player to get p_id
+        //use p_id to get PlayerAndGame rows for that p_id
+        Integer p_id = 0;
+        ArrayList<PlayerAndGame> playerGameList = new ArrayList<>();
+        ArrayList<PlayerRating> playerRatings = new ArrayList<>();
+        for (int i = 0; i < playerTable.getItems().size(); i++) {
+            Player player = (Player)playerTable.getItems().get(i);
+            if(player.getP_fName().equals(ratePlayerCombo.getValue())) {
+                p_id = player.getP_id();
+            }
+        }
+        for (int i = 0; i < playerGameTable.getItems().size(); i++) {
+            PlayerAndGame playerGame = (PlayerAndGame)playerGameTable.getItems().get(i);
+            if(playerGame.getP_id().equals(p_id)) {
+                playerGameList.add(playerGame);
+            }
+        }
+
+        for(int i = 0; i < playerGameList.size(); i++) {
+            for (int j = 0; j < gameTable.getItems().size(); j++) {
+                Game game = (Game)gameTable.getItems().get(j);
+                if(game.getG_id().equals(playerGameList.get(i).getG_id())) {
+                    PlayerRating rating = new PlayerRating(playerGameList.get(i).getPlaying_date(), playerGameList.get(i).getScore(), game.getG_title());
+                    playerRatings.add(rating);
+                }
+            }
+            rateName.setCellValueFactory(new PropertyValueFactory("g_name"));
+            rateScore.setCellValueFactory(new PropertyValueFactory("score"));
+            rateDate.setCellValueFactory(new PropertyValueFactory("playing_date"));
+
+            rateTable.getItems().clear();
+            rateTable.getItems().addAll(playerRatings);
+
+            rateDate.setSortType(TableColumn.SortType.DESCENDING);
+            rateTable.getSortOrder().add(rateDate);
+            rateTable.sort();
+
+        }
+
+    }
 
     public void clearTextFields(){
         playerIdField.clear();
@@ -286,6 +346,7 @@ public class HelloController {
         playerProvinceField.clear();
         playerNumField.clear();
     }
+
 
 
 }

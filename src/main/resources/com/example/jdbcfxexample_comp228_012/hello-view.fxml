@@ -79,6 +79,22 @@
                            <TableColumn fx:id="playerGameDateColumn" prefWidth="111.0" text="DATE PLAYED" />
                        </columns>
                      </TableView>
+                     <TextField fx:id="playerGameId" layoutX="51.0" layoutY="14.0" promptText="ID" />
+                  </children></AnchorPane>
+             </content>
+         </Tab>
+         <Tab text="Player Ratings">
+             <content>
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <TableView fx:id="rateTable" layoutX="375.0" layoutY="27.0" prefHeight="476.0" prefWidth="358.0">
+                       <columns>
+                         <TableColumn fx:id="rateName" prefWidth="176.0" text="GAME" />
+                         <TableColumn fx:id="rateScore" prefWidth="78.0" text="SCORE" />
+                           <TableColumn fx:id="rateDate" prefWidth="103.0" text="DATE PLAYED" />
+                       </columns>
+                     </TableView>
+                     <ComboBox fx:id="ratePlayerCombo" layoutX="70.0" layoutY="80.0" onAction="#onRatePlayerChosen" prefHeight="49.0" prefWidth="150.0" promptText="Player" />
                   </children></AnchorPane>
              </content>
          </Tab>
