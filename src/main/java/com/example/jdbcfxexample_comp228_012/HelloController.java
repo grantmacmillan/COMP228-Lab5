@@ -264,25 +264,7 @@ public class HelloController {
        // playerGameSelectGame.getItems().add()
         ratePlayerCombo.getItems().clear();
         ratePlayerCombo.getItems().addAll(playerNames);
-
-
-
     }
-
-
-
-
-
-
-
-    public void onDrop(ActionEvent actionEvent) throws SQLException {
-        DBUtil.dropTable("COMP228_012");
-    }
-
-    public void onCreate(ActionEvent actionEvent)throws SQLException  {
-        DBUtil.createTable("COMP228_012");
-    }
-
 
     public void onPlayerSelected(MouseEvent mouseEvent) throws SQLException{
         Player player = (Player) playerTable.getSelectionModel().getSelectedItem();

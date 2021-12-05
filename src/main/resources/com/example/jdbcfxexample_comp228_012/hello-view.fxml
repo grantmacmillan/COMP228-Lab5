@@ -14,8 +14,6 @@
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="760.0">
                   <children>
-                     <Button fx:id="dropButton" layoutX="326.0" layoutY="14.0" mnemonicParsing="false" onAction="#onDrop" text="Drop Table" />
-                     <Button fx:id="createButton" layoutX="322.0" layoutY="46.0" mnemonicParsing="false" onAction="#onCreate" text="Create Table" />
                      <TextField fx:id="gameIdField" layoutX="289.0" layoutY="80.0" />
                      <TextField fx:id="gameNameField" layoutX="289.0" layoutY="117.0" />
                      <Button fx:id="addButton" layoutX="345.0" layoutY="151.0" mnemonicParsing="false" onAction="#onAdd" text="Add" />
