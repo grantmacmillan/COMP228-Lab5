@@ -76,7 +76,7 @@ public class HelloController {
     private TableColumn playerProvinceColumn;
     @FXML
     private TableColumn playerNumColumn;
-    
+
     //Player + Game
     @FXML
     private DatePicker playerGameDate;
@@ -113,13 +113,13 @@ public class HelloController {
     @FXML
     private TableColumn rateDate;
 
-    public void initialize() throws SQLException{
+    public void initialize() throws SQLException {
         populateData();
-
     }
 
+    //Game Tab Buttons
     public void onAdd(ActionEvent actionEvent) throws SQLException {
-        DBUtil.insertData("Game", parseInt(gameIdField.getText()),gameNameField.getText());
+        DBUtil.insertData("Game", parseInt(gameIdField.getText()), gameNameField.getText());
         populateData();
     }
 
@@ -129,8 +129,9 @@ public class HelloController {
         populateData();
     }
 
-    public void onPlayerAdd(ActionEvent actionEvent) throws SQLException{
-        DBUtil.insertPlayerData(parseInt(playerIdField.getText()),playerFnameField.getText(), playerLnameField.getText(),playerAddressField.getText(),playerPCField.getText(),playerProvinceField.getText(),Long.parseLong(playerNumField.getText()));
+    //Player Tab Buttons
+    public void onPlayerAdd(ActionEvent actionEvent) throws SQLException {
+        DBUtil.insertPlayerData(parseInt(playerIdField.getText()), playerFnameField.getText(), playerLnameField.getText(), playerAddressField.getText(), playerPCField.getText(), playerProvinceField.getText(), Long.parseLong(playerNumField.getText()));
         populateData();
     }
 
@@ -141,68 +142,129 @@ public class HelloController {
         clearTextFields();
     }
 
-    public void onPlayerUpdate(ActionEvent actionEvent) throws SQLException{
-        DBUtil.updatePlayerData(parseInt(playerIdField.getText()),playerFnameField.getText(), playerLnameField.getText(),playerAddressField.getText(),playerPCField.getText(),playerProvinceField.getText(),Long.parseLong(playerNumField.getText()));
+    public void onPlayerUpdate(ActionEvent actionEvent) throws SQLException {
+        DBUtil.updatePlayerData(parseInt(playerIdField.getText()), playerFnameField.getText(), playerLnameField.getText(), playerAddressField.getText(), playerPCField.getText(), playerProvinceField.getText(), Long.parseLong(playerNumField.getText()));
         populateData();
     }
-    public void onPlayerGameAdd(ActionEvent actionEvent) throws SQLException{
+
+    public void onPlayerSelected(MouseEvent mouseEvent) throws SQLException {
+        //gets selected player and shows their info in the textfields
+        Player player = (Player) playerTable.getSelectionModel().getSelectedItem();
+
+        playerIdField.setText(player.getP_id().toString());
+        playerFnameField.setText(player.getP_fName());
+        playerLnameField.setText(player.getP_lName());
+        playerAddressField.setText(player.getP_address());
+        playerPCField.setText(player.getP_postalCode());
+        playerProvinceField.setText(player.getP_province());
+        playerNumField.setText(player.getP_phoneNum().toString());
+    }
+
+    //used to clear text fields of player tab after deleting or updating a player's data
+    public void clearTextFields() {
+        playerIdField.clear();
+        playerFnameField.clear();
+        playerLnameField.clear();
+        playerAddressField.clear();
+        playerPCField.clear();
+        playerProvinceField.clear();
+        playerNumField.clear();
+    }
+
+    //Player Game Tab Buttons
+    public void onPlayerGameAdd(ActionEvent actionEvent) throws SQLException {
         Integer g_id = 0, p_id = 0;
 
         for (int i = 0; i < gameTable.getItems().size(); i++) {
-            Game game = (Game)gameTable.getItems().get(i);
-            if(game.getG_title().equals(playerGameSelectGame.getValue())) {
+            Game game = (Game) gameTable.getItems().get(i);
+            if (game.getG_title().equals(playerGameSelectGame.getValue())) {
                 g_id = game.getG_id();
             }
         }
         for (int i = 0; i < playerTable.getItems().size(); i++) {
-            Player player = (Player)playerTable.getItems().get(i);
-            if(player.getP_fName().equals(playerGameSelectPlayer.getValue())) {
+            Player player = (Player) playerTable.getItems().get(i);
+            if (player.getP_fName().equals(playerGameSelectPlayer.getValue())) {
                 p_id = player.getP_id();
             }
         }
-        DBUtil.insertPlayerGameData(parseInt(playerGameId.getText()), g_id,p_id, Date.valueOf(playerGameDate.getValue()), parseInt(playerGameScore.getText()));
+        DBUtil.insertPlayerGameData(parseInt(playerGameId.getText()), g_id, p_id, Date.valueOf(playerGameDate.getValue()), parseInt(playerGameScore.getText()));
         populateData();
     }
 
-    public void onPlayerGameDelete(ActionEvent actionEvent) throws SQLException{
+    public void onPlayerGameDelete(ActionEvent actionEvent) throws SQLException {
         PlayerAndGame playerAndGame = (PlayerAndGame) playerGameTable.getSelectionModel().getSelectedItem();
         DBUtil.delete("PlayerAndGame", playerAndGame.getP_g_id(), "player_game_id");
         populateData();
     }
-    
 
-    public void populateData() throws SQLException{
+    //Player Ratings Tab Button(s)
+    public void onRatePlayerChosen(ActionEvent actionEvent) {
+        //Use name of player to get p_id
+        Integer p_id = 0;
+        ArrayList<PlayerAndGame> playerGameList = new ArrayList<>();
+        ArrayList<PlayerRating> playerRatings = new ArrayList<>();
+        for (int i = 0; i < playerTable.getItems().size(); i++) {
+            Player player = (Player) playerTable.getItems().get(i);
+            if (player.getP_fName().equals(ratePlayerCombo.getValue())) {
+                p_id = player.getP_id();
+            }
+        }
+        //Use p_id to get PlayerAndGame rows for that p_id
+        for (int i = 0; i < playerGameTable.getItems().size(); i++) {
+            PlayerAndGame playerGame = (PlayerAndGame) playerGameTable.getItems().get(i);
+            if (playerGame.getP_id().equals(p_id)) {
+                playerGameList.add(playerGame);
+            }
+        }
+        //uses the g_id from the playerGameList to find the game name and then creates a player rating object and adds to a list for later use in JAVAFX
+        for (int i = 0; i < playerGameList.size(); i++) {
+            for (int j = 0; j < gameTable.getItems().size(); j++) {
+                Game game = (Game) gameTable.getItems().get(j);
+                if (game.getG_id().equals(playerGameList.get(i).getG_id())) {
+                    PlayerRating rating = new PlayerRating(playerGameList.get(i).getPlaying_date(), playerGameList.get(i).getScore(), game.getG_title());
+                    playerRatings.add(rating);
+                }
+            }
+        }
+        rateName.setCellValueFactory(new PropertyValueFactory("g_name"));
+        rateScore.setCellValueFactory(new PropertyValueFactory("score"));
+        rateDate.setCellValueFactory(new PropertyValueFactory("playing_date"));
+
+        rateTable.getItems().clear();
+        rateTable.getItems().addAll(playerRatings);
+
+        rateDate.setSortType(TableColumn.SortType.DESCENDING);
+        rateTable.getSortOrder().add(rateDate);
+        rateTable.sort();
+    }
+
+    //for populating/manipulating tables
+    public void populateData() throws SQLException {
         ResultSet rs = DBUtil.query("Game", "SELECT * FROM");
         //create list of objects that we want to show in the table
         ObservableList<Game> games = FXCollections.observableArrayList();
-
         //add objects one by one to the list
-        while (rs.next()){
+        while (rs.next()) {
             Game game = new Game(rs.getInt("game_id"), rs.getString("game_title"));
             games.add(game);
         }
-
-        //assign each attribute of the Student class (entity) to each column of the table
         gameIdColumn.setCellValueFactory(new PropertyValueFactory("g_id"));
         gameNameColumn.setCellValueFactory(new PropertyValueFactory("g_title"));
-
         //clear the gameTable
         gameTable.getItems().clear();
         //add data to the gameTable
         gameTable.getItems().addAll(games);
 
         //sort the table by id
-
         gameIdColumn.setSortType(TableColumn.SortType.ASCENDING);
         gameTable.getSortOrder().add(gameIdColumn);
         gameTable.sort();
 
-
-        //Player
+        //Player Table
         rs = DBUtil.query("Player", "SELECT * FROM");
         ObservableList<Player> players = FXCollections.observableArrayList();
 
-        while (rs.next()){
+        while (rs.next()) {
             Player player = new Player(rs.getInt("player_id"), rs.getString("first_name"), rs.getString("last_name"), rs.getString("address"), rs.getString("postal_code"), rs.getString("province"), rs.getLong("phone_number"));
             players.add(player);
         }
@@ -225,7 +287,7 @@ public class HelloController {
         //Player Game Table
         rs = DBUtil.query("PlayerAndGame", "SELECT * FROM");
         ObservableList<PlayerAndGame> playerAndGames = FXCollections.observableArrayList();
-        while (rs.next()){
+        while (rs.next()) {
             PlayerAndGame playerAndGame = new PlayerAndGame(rs.getInt("player_game_id"), rs.getInt("game_id"), rs.getInt("player_id"), rs.getDate("playing_date"), rs.getInt("score"));
             playerAndGames.add(playerAndGame);
         }
@@ -241,94 +303,28 @@ public class HelloController {
         playerGamePGIDColumn.setSortType(TableColumn.SortType.ASCENDING);
         playerGameTable.getSortOrder().add(playerGamePGIDColumn);
         playerGameTable.sort();
-        //rate game combo boxes
 
+        //Rate Game Tab combo boxes
         //games combobox
         playerGameSelectGame.getItems().clear();
         playerGameSelectPlayer.getItems().clear();
         ArrayList<String> gameNames = new ArrayList<>();
 
-        for(Object row : gameTable.getItems()){
-            gameNames.add((String)gameNameColumn.getCellObservableValue(row).getValue());
+        for (Object row : gameTable.getItems()) {
+            gameNames.add((String) gameNameColumn.getCellObservableValue(row).getValue());
         }
         playerGameSelectGame.getItems().addAll(gameNames);
 
         //player combobox
         ArrayList<String> playerNames = new ArrayList<>();
 
-        for(Object row : playerTable.getItems()){
-            playerNames.add((String)playerFnameColumn.getCellObservableValue(row).getValue());
+        for (Object row : playerTable.getItems()) {
+            playerNames.add((String) playerFnameColumn.getCellObservableValue(row).getValue());
         }
         playerGameSelectPlayer.getItems().addAll(playerNames);
 
-       // playerGameSelectGame.getItems().add()
+        //clears player ratings tab combo box so there won't be duplicate options
         ratePlayerCombo.getItems().clear();
         ratePlayerCombo.getItems().addAll(playerNames);
     }
-
-    public void onPlayerSelected(MouseEvent mouseEvent) throws SQLException{
-        Player player = (Player) playerTable.getSelectionModel().getSelectedItem();
-
-        playerIdField.setText(player.getP_id().toString());
-        playerFnameField.setText(player.getP_fName());
-        playerLnameField.setText(player.getP_lName());
-        playerAddressField.setText(player.getP_address());
-        playerPCField.setText(player.getP_postalCode());
-        playerProvinceField.setText(player.getP_province());
-        playerNumField.setText(player.getP_phoneNum().toString());
-    }
-    public void onRatePlayerChosen(ActionEvent actionEvent) {
-        //Use name of player to get p_id
-        //use p_id to get PlayerAndGame rows for that p_id
-        Integer p_id = 0;
-        ArrayList<PlayerAndGame> playerGameList = new ArrayList<>();
-        ArrayList<PlayerRating> playerRatings = new ArrayList<>();
-        for (int i = 0; i < playerTable.getItems().size(); i++) {
-            Player player = (Player)playerTable.getItems().get(i);
-            if(player.getP_fName().equals(ratePlayerCombo.getValue())) {
-                p_id = player.getP_id();
-            }
-        }
-        for (int i = 0; i < playerGameTable.getItems().size(); i++) {
-            PlayerAndGame playerGame = (PlayerAndGame)playerGameTable.getItems().get(i);
-            if(playerGame.getP_id().equals(p_id)) {
-                playerGameList.add(playerGame);
-            }
-        }
-
-        for(int i = 0; i < playerGameList.size(); i++) {
-            for (int j = 0; j < gameTable.getItems().size(); j++) {
-                Game game = (Game)gameTable.getItems().get(j);
-                if(game.getG_id().equals(playerGameList.get(i).getG_id())) {
-                    PlayerRating rating = new PlayerRating(playerGameList.get(i).getPlaying_date(), playerGameList.get(i).getScore(), game.getG_title());
-                    playerRatings.add(rating);
-                }
-            }
-            rateName.setCellValueFactory(new PropertyValueFactory("g_name"));
-            rateScore.setCellValueFactory(new PropertyValueFactory("score"));
-            rateDate.setCellValueFactory(new PropertyValueFactory("playing_date"));
-
-            rateTable.getItems().clear();
-            rateTable.getItems().addAll(playerRatings);
-
-            rateDate.setSortType(TableColumn.SortType.DESCENDING);
-            rateTable.getSortOrder().add(rateDate);
-            rateTable.sort();
-
-        }
-
-    }
-
-    public void clearTextFields(){
-        playerIdField.clear();
-        playerFnameField.clear();
-        playerLnameField.clear();
-        playerAddressField.clear();
-        playerPCField.clear();
-        playerProvinceField.clear();
-        playerNumField.clear();
-    }
-
-
-
 }
