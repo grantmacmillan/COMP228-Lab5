@@ -140,17 +140,4 @@ public class DBUtil {
         dbDisconnect();
 
     }
-
-    public static void main(String[] arg) throws SQLException{
-
-        //DBUtil.dbConnect();
-        //DBUtil.dbDisconnect();
-        //DBUtil.dropTable("javaClassTest012");
-        //DBUtil.createTable("COMP228_012");
-        //DBUtil.insertData("javaClassTest012", 3,"Ben");
-        //DBUtil.query("javaClassTest012", "SELECT * FROM");
-
-    }
-
-
 }

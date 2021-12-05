@@ -14,20 +14,20 @@
          <content>
            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="143.0" prefWidth="760.0">
                   <children>
-                     <Button fx:id="dropButton" layoutX="326.0" layoutY="14.0" mnemonicParsing="false" onAction="#onDrop" text="Drop Table" />
-                     <Button fx:id="createButton" layoutX="322.0" layoutY="46.0" mnemonicParsing="false" onAction="#onCreate" text="Create Table" />
-                     <TextField fx:id="gameIdField" layoutX="289.0" layoutY="80.0" />
-                     <TextField fx:id="gameNameField" layoutX="289.0" layoutY="117.0" />
-                     <Button fx:id="addButton" layoutX="345.0" layoutY="151.0" mnemonicParsing="false" onAction="#onAdd" text="Add" />
-                     <TableView fx:id="gameTable" layoutX="183.0" layoutY="196.0" prefHeight="196.0" prefWidth="362.0">
+                     <TextField fx:id="gameIdField" layoutX="290.0" layoutY="60.0" />
+                     <TextField fx:id="gameNameField" layoutX="291.0" layoutY="102.0" />
+                     <Button fx:id="addButton" layoutX="183.0" layoutY="159.0" mnemonicParsing="false" onAction="#onAdd" text="Add" />
+                     <TableView fx:id="gameTable" layoutX="185.0" layoutY="197.0" prefHeight="196.0" prefWidth="362.0">
                        <columns>
                          <TableColumn fx:id="gameIdColumn" prefWidth="100.0" text="ID" />
                          <TableColumn fx:id="gameNameColumn" prefWidth="260.0" text="TITLE" />
                        </columns>
                      </TableView>
-                     <Button fx:id="deleteButton" layoutX="338.0" layoutY="412.0" mnemonicParsing="false" onAction="#onGameDelete" text="Delete" />
+                     <Button fx:id="deleteButton" layoutX="494.0" layoutY="159.0" mnemonicParsing="false" onAction="#onGameDelete" text="Delete" />
                   
                       <Label fx:id="welcomeText" />
+                     <Label layoutX="341.0" layoutY="43.0" text="Game ID" />
+                     <Label layoutX="332.0" layoutY="85.0" text="Game Name" />
                   </children>
                </AnchorPane>
          </content>
@@ -54,9 +54,9 @@
                      <TextField fx:id="playerPCField" layoutX="55.0" layoutY="207.0" promptText="Postal Code" />
                      <TextField fx:id="playerProvinceField" layoutX="55.0" layoutY="241.0" promptText="Province" />
                      <TextField fx:id="playerNumField" layoutX="55.0" layoutY="284.0" promptText="Phone Number" />
-                     <Button layoutX="361.0" layoutY="58.0" mnemonicParsing="false" onAction="#onPlayerAdd" text="Add" />
-                     <Button layoutX="354.0" layoutY="95.0" mnemonicParsing="false" onAction="#onPlayerDelete" text="Delete" />
-                     <Button layoutX="386.0" layoutY="174.0" mnemonicParsing="false" onAction="#onPlayerUpdate" text="Update" />
+                     <Button layoutX="266.0" layoutY="284.0" mnemonicParsing="false" onAction="#onPlayerAdd" text="Add" />
+                     <Button layoutX="398.0" layoutY="284.0" mnemonicParsing="false" onAction="#onPlayerDelete" text="Delete" />
+                     <Button layoutX="325.0" layoutY="284.0" mnemonicParsing="false" onAction="#onPlayerUpdate" text="Update" />
                   </children></AnchorPane>
          </content>
        </Tab>
@@ -64,13 +64,13 @@
              <content>
                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                     <TextField fx:id="playerGameScore" layoutX="51.0" layoutY="43.0" promptText="Score" />
-                     <DatePicker fx:id="playerGameDate" layoutX="52.0" layoutY="78.0" prefHeight="25.0" prefWidth="147.0" promptText="Date Played" />
+                     <TextField fx:id="playerGameScore" layoutX="51.0" layoutY="79.0" promptText="Score" />
+                     <DatePicker fx:id="playerGameDate" layoutX="52.0" layoutY="124.0" prefHeight="25.0" prefWidth="147.0" promptText="Date Played" />
                      <ComboBox fx:id="playerGameSelectPlayer" layoutX="380.0" layoutY="43.0" prefWidth="150.0" promptText="Player" />
                      <ComboBox fx:id="playerGameSelectGame" layoutX="380.0" layoutY="91.0" prefWidth="150.0" promptText="Game" />
-                     <Button layoutX="174.0" layoutY="253.0" mnemonicParsing="false" onAction="#onPlayerGameAdd" text="Add" />
-                     <Button layoutX="225.0" layoutY="253.0" mnemonicParsing="false" onAction="#onPlayerGameDelete" text="Delete" />
-                     <TableView fx:id="playerGameTable" layoutX="20.0" layoutY="301.0" prefHeight="200.0" prefWidth="687.0">
+                     <Button layoutX="20.0" layoutY="190.0" mnemonicParsing="false" onAction="#onPlayerGameAdd" text="Add" />
+                     <Button layoutX="656.0" layoutY="190.0" mnemonicParsing="false" onAction="#onPlayerGameDelete" text="Delete" />
+                     <TableView fx:id="playerGameTable" layoutX="20.0" layoutY="234.0" prefHeight="267.0" prefWidth="687.0">
                        <columns>
                          <TableColumn fx:id="playerGamePGIDColumn" prefWidth="75.0" text="PG ID" />
                          <TableColumn fx:id="playerGamePIDColumn" prefWidth="75.0" text="P ID" />
@@ -79,7 +79,7 @@
                            <TableColumn fx:id="playerGameDateColumn" prefWidth="111.0" text="DATE PLAYED" />
                        </columns>
                      </TableView>
-                     <TextField fx:id="playerGameId" layoutX="51.0" layoutY="14.0" promptText="ID" />
+                     <TextField fx:id="playerGameId" layoutX="51.0" layoutY="31.0" promptText="ID" />
                   </children></AnchorPane>
              </content>
          </Tab>
